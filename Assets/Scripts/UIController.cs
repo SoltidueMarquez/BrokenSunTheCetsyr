@@ -1,22 +1,27 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
+    [SerializeField, Tooltip("鼠标光标图片")] private Texture2D cursorTexture;
     [SerializeField, Tooltip("退出按钮")] private Button exitButton;
+    [SerializeField, Tooltip("动画时长")] private float animTime;
 
     private Vector3 m_Offset;//拖拽时的鼠标偏移量
     #region 预览事件
     public void OnPointerEnter(PointerEventData eventData)
     {
         ShowButtonAnim();
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         HideButtonAnim();
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
     #endregion
 
@@ -52,7 +57,6 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     private void ShowButtonAnim()
     {
         exitButton.gameObject.SetActive(true);
-        
     }
     private void HideButtonAnim()
     {

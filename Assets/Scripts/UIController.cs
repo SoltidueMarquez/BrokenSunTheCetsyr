@@ -60,12 +60,14 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        
+        clicked = false;
+        EndClick();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("开始拖动");
+        clicked = false;
+        EndClick();
         if (Camera.main == null) return;
         var tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         this.transform.position = new Vector3(tmpPos.x + mOffset.x, tmpPos.y + mOffset.y, 0);
@@ -86,6 +88,11 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
             HideButtonAnim();
             magnifySlider.gameObject.SetActive(false);
         }
+    }
+    private void EndClick()
+    {
+        HideButtonAnim();
+        magnifySlider.gameObject.SetActive(false);
     }
     #endregion
 

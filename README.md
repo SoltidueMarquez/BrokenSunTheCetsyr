@@ -5,7 +5,7 @@ Unity开发，小人素材来自于PRTS解包的spine动画
 
 
 
-感谢教程https://www.bilibili.com/video/BV1wN411q7ys/的知识分享
+感谢教程https://www.bilibili.com/video/BV1wN411q7ys/  的知识分享
 
 
 

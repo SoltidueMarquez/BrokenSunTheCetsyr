@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     [SerializeField, Tooltip("退出按钮")] private Button exitButton;
     [SerializeField, Tooltip("放大滑动条")] private Slider magnifySlider;
     [SerializeField, Tooltip("动画时长")] private float animTime;
+    [SerializeField, Tooltip("窗口设置")] private BackGroundSet backgroundSet;
 
     [Header("缩放设置")]
     [SerializeField, Tooltip("缩放极值")] private Vector2 scaleBoundary;
@@ -24,6 +25,8 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         scale = PlayerPrefs.GetFloat("myKey", 0.5f);
         magnifySlider.value = AntiNormalization(scaleBoundary.x, scaleBoundary.y, scale);
         deskPetBody.transform.localScale = new Vector3(scale, scale, scale);
+
+        Debug.Log("屏幕大小：" + Screen.currentResolution.width + "," + Screen.currentResolution.height);
     }
 
     private float Normalization(float left, float right, float num)
@@ -70,7 +73,9 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         EndClick();
         if (Camera.main == null) return;
         var tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        this.transform.position = new Vector3(tmpPos.x + mOffset.x, tmpPos.y + mOffset.y, 0);
+        var pos = new Vector2Int((int)tmpPos.x, (int)tmpPos.y);
+        //this.transform.position = new Vector3(tmpPos.x + mOffset.x, tmpPos.y + mOffset.y, 0);
+        backgroundSet.ChangeWindowPosition(pos);
     }
     #endregion
 

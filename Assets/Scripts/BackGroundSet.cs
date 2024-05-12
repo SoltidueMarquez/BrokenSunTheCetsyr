@@ -10,9 +10,8 @@ using UnityEngine.Serialization;
 public class BackGroundSet : MonoBehaviour
 {
     private IntPtr hwnd;
-    private int currentX;
-    private int currentY;
-    
+
+    private Vector2Int windowPosition;
     public Vector2Int screenSize = new Vector2Int(300, 600);
 
     #region Win函数常量
@@ -170,9 +169,9 @@ public class BackGroundSet : MonoBehaviour
         SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_BORDER & ~WS_CAPTION); // 无边框、无标题栏
 
         // 设置窗体位置为右下角
-        currentX = Screen.currentResolution.width - 900;
-        currentY = Screen.currentResolution.height  - 800;
-        SetWindowPos(hwnd, -1, currentX, currentY, screenSize.x, screenSize.y, SWP_SHOWWINDOW); // Screen.currentResolution.width / 4 height...
+        windowPosition.x = Screen.currentResolution.width - screenSize.x;
+        windowPosition.y = Screen.currentResolution.height  - screenSize.y;
+        SetWindowPos(hwnd, -1, windowPosition.x, windowPosition.y, screenSize.x, screenSize.y, SWP_SHOWWINDOW); // Screen.currentResolution.width / 4 height...
 
         // 扩展窗口到客户端区域 -> 为了透明
         var margins = new MARGINS() { cxLeftWidth = -1 }; // 边距内嵌值确定在窗口四侧扩展框架的距离 -1为没有窗口边框
@@ -186,9 +185,13 @@ public class BackGroundSet : MonoBehaviour
 
     public void ChangeWindowPosition(Vector2Int pos)
     {
-        Debug.Log("位置：" + pos);
+        pos = new Vector2Int(
+            Mathf.Clamp(windowPosition.x + pos.x, 0, Screen.currentResolution.width - screenSize.x),
+            Mathf.Clamp(windowPosition.y + pos.y, 0, Screen.currentResolution.height  - screenSize.y));
+        Debug.Log("位移" + pos);
 #if !UNITY_EDITOR
         SetWindowPos(hwnd, -1, pos.x, pos.y, screenSize.x, screenSize.y, SWP_SHOWWINDOW);
 #endif
+        windowPosition = pos;
     }
 }

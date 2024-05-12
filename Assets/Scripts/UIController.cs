@@ -10,8 +10,11 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     [SerializeField, Tooltip("退出按钮")] private Button exitButton;
     [SerializeField, Tooltip("放大滑动条")] private Slider magnifySlider;
     [SerializeField, Tooltip("动画时长")] private float animTime;
-    [SerializeField, Tooltip("窗口设置")] private BackGroundSet backgroundSet;
 
+    [Header("拖拽设置")]
+    [SerializeField, Tooltip("窗口设置")] private BackGroundSet backgroundSet;
+    private Vector3 currentPos;
+    
     [Header("缩放设置")]
     [SerializeField, Tooltip("缩放极值")] private Vector2 scaleBoundary;
 
@@ -71,10 +74,17 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     {
         clicked = false;
         EndClick();
+        DoDrag();
+    }
+
+    private void DoDrag()
+    {
         if (Camera.main == null) return;
         var tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var pos = new Vector2Int((int)tmpPos.x, (int)tmpPos.y);
-        //this.transform.position = new Vector3(tmpPos.x + mOffset.x, tmpPos.y + mOffset.y, 0);
+        var pos = new Vector2Int(
+            (int)Normalization(0,Screen.currentResolution.width/10f,tmpPos.x/30),
+            -(int)Normalization(0,Screen.currentResolution.height/10f,tmpPos.y/30));
+        
         backgroundSet.ChangeWindowPosition(pos);
     }
     #endregion

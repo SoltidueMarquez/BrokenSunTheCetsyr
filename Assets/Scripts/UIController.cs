@@ -13,8 +13,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
 
     [Header("拖拽设置")]
     [SerializeField, Tooltip("窗口设置")] private BackGroundSet backgroundSet;
-    private Vector3 currentPos;
-    
+
     [Header("缩放设置")]
     [SerializeField, Tooltip("缩放极值")] private Vector2 scaleBoundary;
 

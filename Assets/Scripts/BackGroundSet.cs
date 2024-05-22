@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Runtime.InteropServices; // 为了使用DllImport
 using System;
-using UnityEngine.Serialization;
 
 
 /// <summary>
@@ -188,7 +187,7 @@ public class BackGroundSet : MonoBehaviour
         pos = new Vector2Int(
             Mathf.Clamp(windowPosition.x + pos.x, 0, Screen.currentResolution.width - screenSize.x),
             Mathf.Clamp(windowPosition.y + pos.y, 0, Screen.currentResolution.height  - screenSize.y));
-        Debug.Log("位移" + pos);
+        //Debug.Log("位移" + pos);
 #if !UNITY_EDITOR
         SetWindowPos(hwnd, -1, pos.x, pos.y, screenSize.x, screenSize.y, SWP_SHOWWINDOW);
 #endif

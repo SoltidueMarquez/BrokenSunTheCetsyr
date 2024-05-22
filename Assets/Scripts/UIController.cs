@@ -28,7 +28,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         magnifySlider.value = AntiNormalization(scaleBoundary.x, scaleBoundary.y, scale);
         deskPetBody.transform.localScale = new Vector3(scale, scale, scale);
 
-        Debug.Log("屏幕大小：" + Screen.currentResolution.width + "," + Screen.currentResolution.height);
+        //Debug.Log("屏幕大小：" + Screen.currentResolution.width + "," + Screen.currentResolution.height);
     }
 
     private float Normalization(float left, float right, float num)
@@ -96,6 +96,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         {
             ShowButtonAnim();
             magnifySlider.gameObject.SetActive(true);
+            AnimationController.Instance.PlayAnimationOnce(CharacterAnimation.Die);
         }
         else
         {

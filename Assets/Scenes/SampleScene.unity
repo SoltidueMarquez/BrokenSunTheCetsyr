@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 1391722297}
   - component: {fileID: 1391722298}
   - component: {fileID: 1391722299}
+  - component: {fileID: 1391722300}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -426,6 +427,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenSize: {x: 300, y: 600}
+--- !u!114 &1391722300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391722296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aea310d79b7411448fcb4c3d034b033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 4334894260859297691}
 --- !u!222 &4334894259036876484
 CanvasRenderer:
   m_ObjectHideFlags: 0

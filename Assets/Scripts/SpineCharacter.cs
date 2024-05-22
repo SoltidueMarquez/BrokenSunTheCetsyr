@@ -22,15 +22,15 @@ public class SpineCharacter : MonoBehaviour
         return animationList.Any(anim => anim.animName == name);
     }
 
-    public virtual void PlayAnimationAppear() { }
+    public virtual float PlayAnimationAppear() { return 0; }
 
-    public virtual void PlayAnimationIdle() { }
+    public virtual float PlayAnimationIdle() { return 0; }
     
-    public virtual void PlayAnimationClick() { }
+    public virtual float PlayAnimationClick() { return 0; }
     
-    public virtual void PlayAnimationDrag() { }
+    public virtual float PlayAnimationDrag() { return 0; }
     
-    public virtual void PlayAnimationDisAppear() { }
+    public virtual float PlayAnimationDisAppear() { return 0; }
     #endregion
     
     /*定义动画回调事件函数*/

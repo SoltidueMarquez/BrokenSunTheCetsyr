@@ -1,19 +1,22 @@
-﻿namespace SpineCharacters
+﻿using UnityEngine;
+
+namespace SpineCharacters
 {
     public class Theresia : SpineCharacter
     {
-        public override void PlayAnimationAppear()
+        public override float PlayAnimationAppear()
         {
             character.AnimationState.ClearTracks();
             character.AnimationState.SetAnimation(0, "Skill", false);
+            return character.skeleton.Data.FindAnimation("Skill").Duration;
         }
 
-        public override void PlayAnimationIdle() { }
+        public override float PlayAnimationIdle() { return 0; }
     
-        public override void PlayAnimationClick() { }
+        public override float PlayAnimationClick() { return 0; }
     
-        public override void PlayAnimationDrag() { }
+        public override float PlayAnimationDrag() { return 0; }
     
-        public override void PlayAnimationDisAppear() { }
+        public override float PlayAnimationDisAppear() { return 0; }
     }
 }

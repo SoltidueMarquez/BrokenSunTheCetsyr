@@ -4,18 +4,19 @@ namespace SpineCharacters
 {
     public class Cetsyr : SpineCharacter
     {
-        public override void PlayAnimationAppear()
+        public override float PlayAnimationAppear()
         {
             character.AnimationState.ClearTracks();
             character.AnimationState.SetAnimation(0, "Start", false);
+            return character.skeleton.Data.FindAnimation("Start").Duration;
         }
 
-        public override void PlayAnimationIdle() { }
+        public override float PlayAnimationIdle() { return 0; }
     
-        public override void PlayAnimationClick() { }
+        public override float PlayAnimationClick() { return 0; }
     
-        public override void PlayAnimationDrag() { }
+        public override float PlayAnimationDrag() { return 0; }
     
-        public override void PlayAnimationDisAppear() { }
+        public override float PlayAnimationDisAppear() { return 0; }
     }
 }

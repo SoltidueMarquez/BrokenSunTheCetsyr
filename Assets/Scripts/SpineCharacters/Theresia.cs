@@ -4,6 +4,7 @@
     {
         public override void PlayAnimationAppear()
         {
+            character.AnimationState.ClearTracks();
             character.AnimationState.SetAnimation(0, "Skill", false);
         }
 

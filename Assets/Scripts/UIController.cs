@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     [SerializeField, Tooltip("鼠标光标图片")] private Texture2D cursorTexture;
     [SerializeField, Tooltip("放大滑动条")] private Slider magnifySlider;
     [SerializeField, Tooltip("动画时长")] private float animTime;
-    [SerializeField, Tooltip("按钮列表")] private List<Button> buttonList;
+    [SerializeField, Tooltip("UI")] private GameObject UI;
 
     [Header("拖拽设置")]
     [SerializeField, Tooltip("窗口设置")] private BackGroundSet backgroundSet;
@@ -95,36 +95,28 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         clicked = !clicked;
         if (clicked)
         {
-            ShowButtonAnim();
-            magnifySlider.gameObject.SetActive(true);
+            ShowUIAnim();
         }
         else
         {
-            HideButtonAnim();
-            magnifySlider.gameObject.SetActive(false);
+            HideUIAnim();
         }
     }
     private void EndClick()
     {
-        HideButtonAnim();
+        HideUIAnim();
         magnifySlider.gameObject.SetActive(false);
     }
     #endregion
 
     #region UI动画
-    private void ShowButtonAnim()
+    private void ShowUIAnim()
     {
-        foreach (var button in buttonList)
-        {
-            button.gameObject.SetActive(true);
-        }
+        UI.SetActive(true);
     }
-    private void HideButtonAnim()
+    private void HideUIAnim()
     {
-        foreach (var button in buttonList)
-        {
-            button.gameObject.SetActive(false);
-        }
+        UI.gameObject.SetActive(false);
     }
     #endregion
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,9 +8,9 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
 {
     [SerializeField, Tooltip("桌宠")] private GameObject deskPetBody;
     [SerializeField, Tooltip("鼠标光标图片")] private Texture2D cursorTexture;
-    [SerializeField, Tooltip("退出按钮")] private Button exitButton;
     [SerializeField, Tooltip("放大滑动条")] private Slider magnifySlider;
     [SerializeField, Tooltip("动画时长")] private float animTime;
+    [SerializeField, Tooltip("按钮列表")] private List<Button> buttonList;
 
     [Header("拖拽设置")]
     [SerializeField, Tooltip("窗口设置")] private BackGroundSet backgroundSet;
@@ -96,7 +97,6 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         {
             ShowButtonAnim();
             magnifySlider.gameObject.SetActive(true);
-            AnimationController.Instance.PlayAnimationOnce(CharacterAnimation.Die);
         }
         else
         {
@@ -114,15 +114,21 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     #region UI动画
     private void ShowButtonAnim()
     {
-        exitButton.gameObject.SetActive(true);
+        foreach (var button in buttonList)
+        {
+            button.gameObject.SetActive(true);
+        }
     }
     private void HideButtonAnim()
     {
-        exitButton.gameObject.SetActive(false);
+        foreach (var button in buttonList)
+        {
+            button.gameObject.SetActive(false);
+        }
     }
     #endregion
 
-    #region 按钮事件
+    #region UI组件交互功能实现
     private void Magnify()
     {
         scale = Normalization(scaleBoundary.x, scaleBoundary.y, magnifySlider.value);

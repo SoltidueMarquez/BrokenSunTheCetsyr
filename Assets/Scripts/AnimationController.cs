@@ -1,40 +1,47 @@
-﻿using Spine.Unity;
+﻿using System;
+using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 
-public enum CharacterAnimation
-{
-    Idle,
-    Move,
-    Skill,
-    Die,
-    Default
-}
 public class AnimationController : Singleton<AnimationController>
 {
-    [SerializeField, Tooltip("动画角色骨骼")] private SkeletonAnimation character;
+    [SerializeField, Tooltip("角色列表")] private List<SpineCharacter> characterList;
+    [Tooltip("当前动画角色索引")] private int curCharacterIndex;
 
     private void Start()
     {
-        character.AnimationState.Complete += CompleteEvent;//注册动画回调事件函数
+        //初始化
+        foreach (var character in characterList)
+        {
+            character.Initialize();
+        }
     }
 
     #region 动画播放
-    public void PlayAnimationOnce(CharacterAnimation anim)
+    
+
+    #endregion
+
+    #region 角色切换
+    public void SwitchCharacterRight()
     {
-        character.loop = false;
-        character.AnimationState.SetAnimation(0, anim.ToString(), false);
+        curCharacterIndex = (curCharacterIndex + 1 >= characterList.Count) ? 0 : curCharacterIndex + 1;
+        SwitchCharacter();
     }
-    public void PlayAnimationLoop(CharacterAnimation anim)
+    public void SwitchCharacterLeft()
     {
-        character.loop = true;
-        character.AnimationState.SetAnimation(0, anim.ToString(), true);
+        curCharacterIndex = (curCharacterIndex - 1 < 0) ? characterList.Count - 1 : 0;
+        SwitchCharacter();
+    }
+
+    private void SwitchCharacter()
+    {
+        foreach (var character in characterList)
+        {
+            character.gameObject.SetActive(false);
+        }
+        characterList[curCharacterIndex].gameObject.SetActive(true);
+        characterList[curCharacterIndex].PlayAnimationAppear();
     }
     #endregion
-    
-    /*定义动画回调事件函数*/
-    private void CompleteEvent(Spine.TrackEntry trackEntry)
-    {
-        //点击动画播放完成后切换回待机动画
-        character.AnimationState.SetAnimation(0, "Idle", true);
-    }
 }

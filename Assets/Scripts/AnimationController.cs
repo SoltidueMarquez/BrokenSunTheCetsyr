@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Spine.Unity;
 using UnityEngine;
 
 public class AnimationController : Singleton<AnimationController>
@@ -15,6 +14,11 @@ public class AnimationController : Singleton<AnimationController>
         {
             character.Initialize();
         }
+    }
+    
+    private void Update()
+    {
+        PlayRandomAnim();
     }
     
     #region 角色切换
@@ -45,7 +49,10 @@ public class AnimationController : Singleton<AnimationController>
     #region 随机动画播放
     private void PlayRandomAnim()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            characterList[curCharacterIndex].PlayRandomAnimation();
+        }
     }
     #endregion
 }

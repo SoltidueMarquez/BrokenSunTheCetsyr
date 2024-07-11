@@ -6,14 +6,12 @@ namespace SpineCharacters
     {
         public override float PlayAnimationAppear()
         {
-            character.AnimationState.ClearTracks();
-            character.AnimationState.SetAnimation(0, "Skill", false);
-            return character.skeleton.Data.FindAnimation("Skill").Duration;
+            return PlayAnimation("Skill", false);
         }
         
-        public override float PlayRandomAnimation()
+        public override float PlayAnimationDisAppear()
         {
-            return 0;
+            return PlayAnimation("Die", false);
         }
 
         public override float PlayAnimationIdle() { return 0; }
@@ -22,11 +20,5 @@ namespace SpineCharacters
     
         public override float PlayAnimationDrag() { return 0; }
 
-        public override float PlayAnimationDisAppear()
-        {
-            character.AnimationState.ClearTracks();
-            character.AnimationState.SetAnimation(0, "Die", false);
-            return character.skeleton.Data.FindAnimation("Die").Duration;
-        }
     }
 }

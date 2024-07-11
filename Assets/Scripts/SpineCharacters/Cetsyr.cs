@@ -1,30 +1,28 @@
-﻿namespace SpineCharacters
+﻿using UnityEngine;
+
+namespace SpineCharacters
 {
     public class Cetsyr : SpineCharacter
     {
         public override float PlayAnimationAppear()
         {
-            character.AnimationState.ClearTracks();
-            character.AnimationState.SetAnimation(0, "Start", false);
-            return character.skeleton.Data.FindAnimation("Start").Duration;
+            return PlayAnimation("Start", false);
         }
-
-        public override float PlayRandomAnimation()
+        
+        public override float PlayAnimationDisAppear()
         {
-            return 0;
+            return PlayAnimation("Die", false);
         }
+        
+        public override float PlayAnimationIdle()
+        {
+            return PlayAnimation("Idle", false);
+        }
+        
 
-        public override float PlayAnimationIdle() { return 0; }
-    
         public override float PlayAnimationClick() { return 0; }
     
         public override float PlayAnimationDrag() { return 0; }
     
-        public override float PlayAnimationDisAppear()
-        {
-            character.AnimationState.ClearTracks();
-            character.AnimationState.SetAnimation(0, "Die", false);
-            return character.skeleton.Data.FindAnimation("Die").Duration;
-        }
     }
 }

@@ -1492,7 +1492,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  animationList: []
+  randomAnimationList:
+  - animName: Skill_1_Loop
+    animTime: 0
+  - animName: Skill_2_Loop
+    animTime: 0
+  - animName: Skill_3_Loop
+    animTime: 0
 --- !u!222 &4334894260455783670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1830,11 +1836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  animationList:
-  - animName: Die
-    animTime: 0
-  - animName: Idle
-    animTime: 0
+  randomAnimationList:
   - animName: Move
     animTime: 0
   - animName: Skill

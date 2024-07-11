@@ -16,22 +16,19 @@ public class AnimationController : Singleton<AnimationController>
             character.Initialize();
         }
     }
-
-    #region 动画播放
     
-
-    #endregion
-
     #region 角色切换
     public void SwitchCharacterRight()
     {
+        var time = characterList[curCharacterIndex].PlayAnimationDisAppear();
         curCharacterIndex = (curCharacterIndex + 1 >= characterList.Count) ? 0 : curCharacterIndex + 1;
-        SwitchCharacter();
+        Invoke(nameof(SwitchCharacter),time);
     }
     public void SwitchCharacterLeft()
     {
+        var time = characterList[curCharacterIndex].PlayAnimationDisAppear();
         curCharacterIndex = (curCharacterIndex - 1 < 0) ? characterList.Count - 1 : 0;
-        SwitchCharacter();
+        Invoke(nameof(SwitchCharacter),time);
     }
 
     private void SwitchCharacter()
@@ -42,6 +39,13 @@ public class AnimationController : Singleton<AnimationController>
         }
         characterList[curCharacterIndex].gameObject.SetActive(true);
         characterList[curCharacterIndex].PlayAnimationAppear();
+    }
+    #endregion
+
+    #region 随机动画播放
+    private void PlayRandomAnim()
+    {
+        
     }
     #endregion
 }

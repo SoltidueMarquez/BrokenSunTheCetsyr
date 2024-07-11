@@ -31,6 +31,8 @@ public class SpineCharacter : MonoBehaviour
     public virtual float PlayAnimationDrag() { return 0; }
     
     public virtual float PlayAnimationDisAppear() { return 0; }
+    
+    public virtual float PlayRandomAnimation() { return 0; }
     #endregion
     
     /*定义动画回调事件函数*/

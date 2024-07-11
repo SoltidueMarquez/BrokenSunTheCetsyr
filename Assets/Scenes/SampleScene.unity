@@ -1456,7 +1456,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: Skill_1_Begin
+  _animationName: Idle
   loop: 1
   timeScale: 1
 --- !u!1 &4334894260343353279
@@ -1830,7 +1830,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  animationList: []
+  animationList:
+  - animName: Die
+    animTime: 0
+  - animName: Idle
+    animTime: 0
+  - animName: Move
+    animTime: 0
+  - animName: Skill
+    animTime: 0
 --- !u!114 &4334894261009085616
 MonoBehaviour:
   m_ObjectHideFlags: 0

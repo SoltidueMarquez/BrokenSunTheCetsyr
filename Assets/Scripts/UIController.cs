@@ -120,6 +120,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     private void ShowUIAnim()
     {
         UI.SetActive(true);
+        magnifySlider.gameObject.SetActive(true);
     }
     private void HideUIAnim()
     {

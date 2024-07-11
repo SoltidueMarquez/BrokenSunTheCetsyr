@@ -17,6 +17,7 @@ public class AnimationController : Singleton<AnimationController>
         {
             character.Initialize();
         }
+        characterList[curCharacterIndex].PlayAnimationAppear();
     }
     
     private void Update()

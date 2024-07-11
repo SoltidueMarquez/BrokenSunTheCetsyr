@@ -22,12 +22,19 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     private Vector3 mOffset;//拖拽时的鼠标偏移量
     private bool clicked;
     
+    [Header("随机动画播放设置")] 
+    [SerializeField, Tooltip("随机动画勾选框")] private Toggle randomAnimToggle;
+    
     private void Start()
     {
         magnifySlider.onValueChanged.AddListener(delegate {Magnify();});
         scale = PlayerPrefs.GetFloat("myKey", 0.5f);
         magnifySlider.value = AntiNormalization(scaleBoundary.x, scaleBoundary.y, scale);
         deskPetBody.transform.localScale = new Vector3(scale, scale, scale);
+        randomAnimToggle.onValueChanged.AddListener((bool isOn) =>
+        {
+            AnimationController.Instance.SetIfPlayRandomAnim(isOn);
+        });
 
         //Debug.Log("屏幕大小：" + Screen.currentResolution.width + "," + Screen.currentResolution.height);
     }

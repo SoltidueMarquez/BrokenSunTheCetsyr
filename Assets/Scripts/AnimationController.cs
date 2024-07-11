@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationController : Singleton<AnimationController>
 {
     [SerializeField, Tooltip("角色列表")] private List<SpineCharacter> characterList;
     [Tooltip("当前动画角色索引")] private int curCharacterIndex;
+    [Header("随机动画播放")] 
+    [SerializeField, Tooltip("时间间隔")] private float timeInterval;
+    [SerializeField, Tooltip("是否随机播放动画")] private bool ifPlayRandomAnim = true;
+    [SerializeField, Tooltip("计时器")] private float animCounter;
 
     private void Start()
     {
@@ -43,15 +46,25 @@ public class AnimationController : Singleton<AnimationController>
         }
         characterList[curCharacterIndex].gameObject.SetActive(true);
         characterList[curCharacterIndex].PlayAnimationAppear();
+        animCounter = 0f;//重置随机动画计时器
     }
     #endregion
 
     #region 随机动画播放
+    public void SetIfPlayRandomAnim(bool flag)
+    {
+        ifPlayRandomAnim = flag;
+    }
     private void PlayRandomAnim()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (ifPlayRandomAnim)
         {
-            characterList[curCharacterIndex].PlayRandomAnimation();
+            animCounter += Time.deltaTime;
+            if (animCounter > timeInterval)
+            {
+                characterList[curCharacterIndex].PlayRandomAnimation();
+                animCounter = 0f;
+            }
         }
     }
     #endregion

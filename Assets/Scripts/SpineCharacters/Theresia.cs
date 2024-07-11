@@ -14,7 +14,10 @@ namespace SpineCharacters
             return PlayAnimation("Die", false);
         }
 
-        public override float PlayAnimationIdle() { return 0; }
+        public override float PlayAnimationIdle()
+        {
+            return PlayAnimation("Idle", false);
+        }
     
         public override float PlayAnimationClick() { return 0; }
     

@@ -1874,7 +1874,8 @@ MonoBehaviour:
   - Start
   disappearAnimNames:
   - Die
-  counter: 0
+  moveOffset: 0
+  moveSpeed: 1
 --- !u!222 &4334894260455783670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2218,11 +2219,14 @@ MonoBehaviour:
     - Move
   - animName:
     - Move
+  - animName:
+    - Skill
   appearAnimNames:
   - Skill
   disappearAnimNames:
   - Die
-  counter: 0
+  moveOffset: 2.6
+  moveSpeed: 1
 --- !u!114 &4334894261009085616
 MonoBehaviour:
   m_ObjectHideFlags: 0

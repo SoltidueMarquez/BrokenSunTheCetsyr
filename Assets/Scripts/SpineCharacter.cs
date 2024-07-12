@@ -14,8 +14,8 @@ public class SpineCharacter : MonoBehaviour
     [Header("固定动画设置")]
     [SerializeField, Tooltip("出现动画列表")] protected List<string> appearAnimNames;
     [SerializeField, Tooltip("消失动画列表")] protected List<string> disappearAnimNames;
-    [SerializeField]float counter = 0;
-    
+    [SerializeField, Tooltip("移动时间偏差值")] private float moveOffset = 2.6f;
+    [SerializeField, Tooltip("移动速度")] private int moveSpeed = 1;
     
     public void Initialize()
     {
@@ -67,6 +67,7 @@ public class SpineCharacter : MonoBehaviour
             if (animName == "Move")
             {
                 StopCoroutine(MoveAnim());
+                Debug.Log("开始");
                 StartCoroutine(MoveAnim());
             }
             else
@@ -78,14 +79,13 @@ public class SpineCharacter : MonoBehaviour
     }
     private IEnumerator MoveAnim()
     {
-        float duration = PlayAnimation("Move", false);
-        Debug.Log("开始");
+        float duration = PlayAnimation("Move", false) - moveOffset;
+        Vector2Int direction = new Vector2Int(1,0)* moveSpeed;
         for (int i = 0; i < 2; i++)
         {
-            Debug.Log(i);
-            counter = 0f;
+            float counter = 0f;
             this.transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            Vector2Int direction = new Vector2Int(1,0);
+            direction *= -1;
             while (counter < duration/2)
             {
                 UIController.Instance.MoveWindow(direction);

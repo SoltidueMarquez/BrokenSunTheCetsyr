@@ -14,6 +14,7 @@ public class SpineCharacter : MonoBehaviour
     [Header("固定动画设置")]
     [SerializeField, Tooltip("出现动画列表")] protected List<string> appearAnimNames;
     [SerializeField, Tooltip("消失动画列表")] protected List<string> disappearAnimNames;
+    [SerializeField]float counter = 0;
     
     
     public void Initialize()
@@ -62,22 +63,37 @@ public class SpineCharacter : MonoBehaviour
     {
         foreach (var animName in animationNames)
         {
-            // 播放动画并获取其持续时间
-            float duration = PlayAnimation(animName, false);
             //走动动画的特殊效果
-            if (animName == "Move") { StartCoroutine(MoveAnim(duration)); }
-            // 等待动画播放完毕
-            yield return new WaitForSeconds(duration);
+            if (animName == "Move")
+            {
+                StopCoroutine(MoveAnim());
+                StartCoroutine(MoveAnim());
+            }
+            else
+            {
+                float duration = PlayAnimation(animName, false);
+                yield return new WaitForSeconds(duration);// 等待动画播放完毕
+            }
         }
     }
-    private IEnumerator MoveAnim(float duration)
+    private IEnumerator MoveAnim()
     {
-        Debug.Log(duration);
+        float duration = PlayAnimation("Move", false);
+        Debug.Log("开始");
         for (int i = 0; i < 2; i++)
         {
+            Debug.Log(i);
+            counter = 0f;
             this.transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            yield return new WaitForSeconds(duration/2);
+            Vector2Int direction = new Vector2Int(1,0);
+            while (counter < duration/2)
+            {
+                UIController.Instance.MoveWindow(direction);
+                counter += 0.01f;
+                yield return new WaitForSeconds(0.01f);
+            }
         }
+        Debug.Log("结束");
     }
     #endregion
     

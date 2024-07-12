@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
+    public static UIController Instance;
     [SerializeField, Tooltip("桌宠")] private GameObject deskPetBody;
     [SerializeField, Tooltip("鼠标光标图片")] private Texture2D cursorTexture;
     [SerializeField, Tooltip("放大滑动条")] private Slider magnifySlider;
@@ -37,6 +36,11 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         });
 
         //Debug.Log("屏幕大小：" + Screen.currentResolution.width + "," + Screen.currentResolution.height);
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 
     private float Normalization(float left, float right, float num)
@@ -93,6 +97,11 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
             -(int)Normalization(0,Screen.currentResolution.height/10f,tmpPos.y/30));
         
         backgroundSet.ChangeWindowPosition(pos);
+    }
+
+    public void MoveWindow(Vector2Int direction)
+    {
+        backgroundSet.ChangeWindowPosition(direction);
     }
     #endregion
 

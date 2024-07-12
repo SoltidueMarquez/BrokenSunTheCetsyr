@@ -18,7 +18,6 @@ namespace SpineCharacters
         {
             return PlayAnimation("Idle", false);
         }
-        
 
         public override float PlayAnimationClick() { return 0; }
     

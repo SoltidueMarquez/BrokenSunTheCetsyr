@@ -38,21 +38,27 @@ public class SpineCharacter : MonoBehaviour
     public void PlayRandomAnimation()
     {
         var index = Random.Range(0, randomAnimationList.Count);
-        PlayAnimGroup(randomAnimationList[index].animName);
+        StartCoroutine(PlayAnimationsInSequence(randomAnimationList[index].animName));
     }
-    private void PlayAnimGroup(List<string> animGroup)//播放动画序列
+    private IEnumerator PlayAnimationsInSequence(List<string> animationNames)//播放动画序列协程
     {
-        StartCoroutine(PlayAnimationsInSequence(animGroup));
-    }
-    private IEnumerator PlayAnimationsInSequence(List<string> animationNames)
-    {
-        for (int i = 0; i < animationNames.Count; i++)//循环播放动画
+        foreach (var animName in animationNames)
         {
             // 播放动画并获取其持续时间
-            float duration = PlayAnimation(animationNames[i], false);
-
+            float duration = PlayAnimation(animName, false);
+            //走动动画的特殊效果
+            if (animName == "Move") { StartCoroutine(MoveAnim(duration)); }
             // 等待动画播放完毕
             yield return new WaitForSeconds(duration);
+        }
+    }
+    private IEnumerator MoveAnim(float duration)
+    {
+        Debug.Log(duration);
+        for (int i = 0; i < 4; i++)
+        {
+            
+            yield return new WaitForSeconds(duration/4);
         }
     }
     #endregion

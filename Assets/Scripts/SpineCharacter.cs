@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
@@ -17,11 +18,6 @@ public class SpineCharacter : MonoBehaviour
     }
     
     #region 动画播放
-    /*protected bool FindAnim(string name)
-    {
-        return animationList.Any(anim => anim.animName == name);
-    }*/
-
     protected float PlayAnimation(string animName, bool loop)
     {
         character.AnimationState.ClearTracks();
@@ -39,11 +35,25 @@ public class SpineCharacter : MonoBehaviour
     
     public virtual float PlayAnimationDrag() { return 0; }
 
-    public float PlayRandomAnimation()
+    public void PlayRandomAnimation()
     {
         var index = Random.Range(0, randomAnimationList.Count);
-        PlayAnimation(randomAnimationList[index].animName, false);
-        return randomAnimationList[index].animTime;
+        PlayAnimGroup(randomAnimationList[index].animName);
+    }
+    private void PlayAnimGroup(List<string> animGroup)//播放动画序列
+    {
+        StartCoroutine(PlayAnimationsInSequence(animGroup));
+    }
+    private IEnumerator PlayAnimationsInSequence(List<string> animationNames)
+    {
+        for (int i = 0; i < animationNames.Count; i++)//循环播放动画
+        {
+            // 播放动画并获取其持续时间
+            float duration = PlayAnimation(animationNames[i], false);
+
+            // 等待动画播放完毕
+            yield return new WaitForSeconds(duration);
+        }
     }
     #endregion
     
@@ -58,7 +68,7 @@ public class SpineCharacter : MonoBehaviour
 [Serializable]
 public class SpineAnimation
 {
-    public string animName;
-    public float animTime;
+    public List<string> animName;
+    //public float animTime;
 }
 

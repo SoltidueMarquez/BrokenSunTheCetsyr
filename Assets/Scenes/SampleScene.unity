@@ -1858,12 +1858,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 0}
   randomAnimationList:
-  - animName: Skill_1_Loop
-    animTime: 0
-  - animName: Skill_2_Loop
-    animTime: 0
-  - animName: Skill_3_Loop
-    animTime: 0
+  - animName:
+    - Skill_3_Begin
+    - Skill_3_Loop
+    - Skill_3_End
+  - animName:
+    - Skill_1_Begin
+    - Skill_1_Loop
+    - Skill_1_End
+  - animName:
+    - Skill_2_Begin
+    - Skill_2_Loop
+    - Skill_2_End
 --- !u!222 &4334894260455783670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2203,10 +2209,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 0}
   randomAnimationList:
-  - animName: Move
-    animTime: 0
-  - animName: Skill
-    animTime: 0
+  - animName:
+    - Move
+  - animName:
+    - Skill
 --- !u!114 &4334894261009085616
 MonoBehaviour:
   m_ObjectHideFlags: 0

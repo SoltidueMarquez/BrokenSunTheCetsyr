@@ -73,10 +73,10 @@ public class SpineCharacter : MonoBehaviour
     private IEnumerator MoveAnim(float duration)
     {
         Debug.Log(duration);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
-            
-            yield return new WaitForSeconds(duration/4);
+            this.transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            yield return new WaitForSeconds(duration/2);
         }
     }
     #endregion

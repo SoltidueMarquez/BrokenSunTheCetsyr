@@ -960,9 +960,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterList:
-  - {fileID: 4334894260859297692}
-  - {fileID: 4334894260343353280}
-  timeInterval: 20
+  - {fileID: 4334894260859297693}
+  - {fileID: 4334894260343353281}
+  timeInterval: 10
   ifPlayRandomAnim: 1
   animCounter: 0
 --- !u!1 &1444662777
@@ -1836,7 +1836,7 @@ GameObject:
   - component: {fileID: 4334894260343353275}
   - component: {fileID: 4334894260343353274}
   - component: {fileID: 4334894260343353277}
-  - component: {fileID: 4334894260343353280}
+  - component: {fileID: 4334894260343353281}
   m_Layer: 0
   m_Name: Cetsyr
   m_TagString: Untagged
@@ -1844,7 +1844,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &4334894260343353280
+--- !u!114 &4334894260343353281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1853,15 +1853,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4334894260343353279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042beb3995bb1ea49bc07eda65db775b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e6403ed65a967e48bf8c21ca9e9e443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
   randomAnimationList:
-  - animName:
-    - Skill_3_Begin
-    - Skill_3_Loop
-    - Skill_3_End
   - animName:
     - Skill_1_Begin
     - Skill_1_Loop
@@ -1870,6 +1866,14 @@ MonoBehaviour:
     - Skill_2_Begin
     - Skill_2_Loop
     - Skill_2_End
+  - animName:
+    - Skill_3_Begin
+    - Skill_3_Loop
+    - Skill_3_End
+  appearAnimNames:
+  - Start
+  disappearAnimNames:
+  - Die
 --- !u!222 &4334894260455783670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2150,7 +2154,7 @@ GameObject:
   - component: {fileID: 4334894260859297689}
   - component: {fileID: 4334894260859297688}
   - component: {fileID: 4334894260859297691}
-  - component: {fileID: 4334894260859297692}
+  - component: {fileID: 4334894260859297693}
   m_Layer: 0
   m_Name: Theresia
   m_TagString: Untagged
@@ -2195,7 +2199,7 @@ MonoBehaviour:
   _animationName: Idle
   loop: 1
   timeScale: 1
---- !u!114 &4334894260859297692
+--- !u!114 &4334894260859297693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2204,7 +2208,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4334894260859297690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d44ddf4b92b8c47a74721e4d3553b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e6403ed65a967e48bf8c21ca9e9e443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
@@ -2213,6 +2217,10 @@ MonoBehaviour:
     - Move
   - animName:
     - Skill
+  appearAnimNames:
+  - Skill
+  disappearAnimNames:
+  - Die
 --- !u!114 &4334894261009085616
 MonoBehaviour:
   m_ObjectHideFlags: 0

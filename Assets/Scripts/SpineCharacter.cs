@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Spine.Unity;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,6 +11,10 @@ public class SpineCharacter : MonoBehaviour
 {
     [SerializeField, Tooltip("动画角色骨骼")] protected SkeletonAnimation character;
     [SerializeField, Tooltip("用于随机动画播放的动画列表")] protected List<SpineAnimation> randomAnimationList;
+    [Header("固定动画设置")]
+    [SerializeField, Tooltip("出现动画列表")] protected List<string> appearAnimNames;
+    [SerializeField, Tooltip("消失动画列表")] protected List<string> disappearAnimNames;
+    
     
     public void Initialize()
     {
@@ -18,18 +23,25 @@ public class SpineCharacter : MonoBehaviour
     }
     
     #region 动画播放
-    protected float PlayAnimation(string animName, bool loop)
+    private float PlayAnimation(string animName, bool loop)
     {
         character.AnimationState.ClearTracks();
         character.AnimationState.SetAnimation(0, animName, loop);
         return character.skeleton.Data.FindAnimation(animName).Duration;
     }
-    
-    public virtual float PlayAnimationAppear() { return 0; }
 
-    public virtual float PlayAnimationDisAppear() { return 0; }
-    
-    public virtual float PlayAnimationIdle() { return 0; }
+    public float PlayAnimationAppear()
+    {
+        //return PlayGroupAnim(appearAnimNames);
+        return PlayAnimation(appearAnimNames[0], false);
+    }
+
+    public float PlayAnimationDisAppear()
+    {
+        //return PlayGroupAnim(disappearAnimNames);
+        return PlayAnimation(disappearAnimNames[0], false);
+    }
+    public float PlayAnimationIdle() { return PlayAnimation("Idle", false); }
     
     public virtual float PlayAnimationClick() { return 0; }
     
@@ -38,7 +50,13 @@ public class SpineCharacter : MonoBehaviour
     public void PlayRandomAnimation()
     {
         var index = Random.Range(0, randomAnimationList.Count);
-        StartCoroutine(PlayAnimationsInSequence(randomAnimationList[index].animName));
+        PlayGroupAnim(randomAnimationList[index].animName);
+    }
+    private float PlayGroupAnim(List<string> animationNames)
+    {
+        var duration = appearAnimNames.Sum(animName => character.skeleton.Data.FindAnimation(animName).Duration);
+        StartCoroutine(PlayAnimationsInSequence(animationNames));
+        return duration;
     }
     private IEnumerator PlayAnimationsInSequence(List<string> animationNames)//播放动画序列协程
     {
@@ -75,6 +93,5 @@ public class SpineCharacter : MonoBehaviour
 public class SpineAnimation
 {
     public List<string> animName;
-    //public float animTime;
 }
 

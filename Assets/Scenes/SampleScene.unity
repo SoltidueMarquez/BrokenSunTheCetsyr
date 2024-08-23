@@ -958,7 +958,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1315044498
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2033,7 +2033,7 @@ MonoBehaviour:
   backgroundSet: {fileID: 1391722299}
   scaleBoundary: {x: 0.25, y: 1}
   randomAnimToggle: {fileID: 780649748}
-  positionText: {fileID: 1315044497}
+  screenText: {fileID: 1315044497}
 --- !u!1 &4334894260455783675
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,9 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
+public class UIController : Singleton<UIController>,IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
-    public static UIController Instance;
     [SerializeField, Tooltip("桌宠")] private GameObject deskPetBody;
     [SerializeField, Tooltip("鼠标光标图片")] private Texture2D cursorTexture;
     [SerializeField, Tooltip("放大滑动条")] private Slider magnifySlider;
@@ -24,6 +23,8 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     
     [Header("随机动画播放设置")] 
     [SerializeField, Tooltip("随机动画勾选框")] private Toggle randomAnimToggle;
+
+    public Text screenText;
     
     
     private void Start()
@@ -38,9 +39,9 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         });
     }
 
-    private void Awake()
+    private void Update()
     {
-        Instance = this;
+        Test();
     }
 
     private float Normalization(float left, float right, float num)
@@ -143,6 +144,11 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         scale = Normalization(scaleBoundary.x, scaleBoundary.y, magnifySlider.value);
         deskPetBody.transform.localScale = new Vector3(scale, scale, scale);
         PlayerPrefs.SetFloat("myKey", scale);
+    }
+
+    private void Test()
+    {
+        screenText.text = backgroundSet.CheckPosition().x + backgroundSet.CheckIfEdge().ToString();
     }
     #endregion
 }

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Runtime.InteropServices; // 为了使用DllImport
 using System;
-using Unity.Mathematics;
 
 
 /// <summary>
@@ -212,6 +211,6 @@ public class BackGroundSet : MonoBehaviour
     {
         if (Camera.main == null) return false;
         var screenWidth = Screen.currentResolution.width;
-        return (windowPosition.x < 0 + Mathf.Epsilon) && (windowPosition.x > screenWidth - screenSize.x - Mathf.Epsilon);
+        return (windowPosition.x <= 0 + Mathf.Epsilon) || (windowPosition.x >= screenWidth - screenSize.x - Mathf.Epsilon);
     }
 }

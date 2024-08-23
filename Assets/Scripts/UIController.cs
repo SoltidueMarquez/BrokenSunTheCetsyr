@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIController : Singleton<UIController>,IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
+public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     [SerializeField, Tooltip("桌宠")] private GameObject deskPetBody;
     [SerializeField, Tooltip("鼠标光标图片")] private Texture2D cursorTexture;

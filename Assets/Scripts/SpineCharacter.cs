@@ -103,7 +103,7 @@ public class SpineCharacter : MonoBehaviour
             direction *= -1;
             while (counter < duration/2)
             {
-                UIController.Instance.MoveWindow(direction);
+                AnimationController.Instance.backgroundSet.ChangeWindowPosition(direction);
                 counter += 0.01f;
                 yield return new WaitForSeconds(0.01f);
             }

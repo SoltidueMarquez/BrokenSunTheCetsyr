@@ -9,6 +9,8 @@ public class AnimationController : Singleton<AnimationController>
     [SerializeField, Tooltip("时间间隔")] private float timeInterval;
     [SerializeField, Tooltip("是否随机播放动画")] private bool ifPlayRandomAnim = true;
     [SerializeField, Tooltip("计时器")] private float animCounter;
+    
+    [SerializeField, Tooltip("窗口设置")] public BackGroundSet backgroundSet;
 
     private void Start()
     {

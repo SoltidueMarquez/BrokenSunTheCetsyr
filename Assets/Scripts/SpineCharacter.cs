@@ -74,12 +74,12 @@ public class SpineCharacter : MonoBehaviour
     {
         foreach (var animName in animationNames)
         {
-            //走动动画的特殊效果
+            //走动动画的特殊效果，这边的协程可以替换
             if (animName == "Move")
             {
-                StopCoroutine(MoveAnim());
+                StopCoroutine(MoveAnim_02());
                 Debug.Log("开始");
-                StartCoroutine(MoveAnim());
+                StartCoroutine(MoveAnim_02());
             }
             else
             {
@@ -90,10 +90,10 @@ public class SpineCharacter : MonoBehaviour
     }
     
     /// <summary>
-    /// 来回走路的协程
+    /// 走路协程1:来回折返走
     /// </summary>
     /// <returns></returns>
-    private IEnumerator MoveAroundAnim()
+    private IEnumerator MoveAnim_01()
     {
         float duration = PlayAnimation("Move", false) - moveOffset;
         Vector2Int direction = new Vector2Int(1,0)* moveSpeed;
@@ -109,14 +109,13 @@ public class SpineCharacter : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
         }
-        //Debug.Log("走路结束");
     }
     
     /// <summary>
-    /// 走路协程
+    /// 走路协程2:一直走路，直到碰到屏幕边缘自动转向
     /// </summary>
     /// <returns></returns>
-    private IEnumerator MoveAnim()
+    private IEnumerator MoveAnim_02()
     {
         float duration = PlayAnimation("Move", false) - moveOffset;
         Vector2Int direction = walkDir* moveSpeed;
@@ -134,8 +133,6 @@ public class SpineCharacter : MonoBehaviour
             counter += 0.01f;
             yield return new WaitForSeconds(0.01f);
         }
-        
-        //Debug.Log("走路结束");
     }
     #endregion
     

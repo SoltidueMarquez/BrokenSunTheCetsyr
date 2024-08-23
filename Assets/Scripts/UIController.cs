@@ -21,9 +21,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     [Header("随机动画播放设置")] 
     [SerializeField, Tooltip("随机动画勾选框")] private Toggle randomAnimToggle;
 
-    public Text screenText;
-    
-    
+
     private void Start()
     {
         magnifySlider.onValueChanged.AddListener(delegate {Magnify();});
@@ -34,11 +32,6 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         {
             AnimationController.Instance.SetIfPlayRandomAnim(isOn);
         });
-    }
-
-    private void Update()
-    {
-        Test();
     }
 
     private float Normalization(float left, float right, float num)
@@ -136,11 +129,6 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         scale = Normalization(scaleBoundary.x, scaleBoundary.y, magnifySlider.value);
         deskPetBody.transform.localScale = new Vector3(scale, scale, scale);
         PlayerPrefs.SetFloat("myKey", scale);
-    }
-
-    private void Test()
-    {
-        screenText.text = BackGroundSet.Instance.CheckPosition().x + BackGroundSet.Instance.CheckIfEdge().ToString();
     }
     #endregion
 }

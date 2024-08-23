@@ -16,6 +16,7 @@ public class SpineCharacter : MonoBehaviour
     [SerializeField, Tooltip("消失动画列表")] protected List<string> disappearAnimNames;
     [SerializeField, Tooltip("移动时间偏差值")] private float moveOffset = 2.6f;
     [SerializeField, Tooltip("移动速度")] private int moveSpeed = 1;
+    private Vector2Int walkDir = new Vector2Int(1, 0);
     
     public void Initialize()
     {
@@ -92,7 +93,7 @@ public class SpineCharacter : MonoBehaviour
     /// 来回走路的协程
     /// </summary>
     /// <returns></returns>
-    private IEnumerator MoveAnim()
+    private IEnumerator MoveAroundAnim()
     {
         float duration = PlayAnimation("Move", false) - moveOffset;
         Vector2Int direction = new Vector2Int(1,0)* moveSpeed;
@@ -108,6 +109,32 @@ public class SpineCharacter : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
         }
+        //Debug.Log("走路结束");
+    }
+    
+    /// <summary>
+    /// 走路协程
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator MoveAnim()
+    {
+        float duration = PlayAnimation("Move", false) - moveOffset;
+        Vector2Int direction = walkDir* moveSpeed;
+        
+        float counter = 0f;
+        while (counter < duration)
+        {
+            BackGroundSet.Instance.ChangeWindowPosition(direction);
+            if (BackGroundSet.Instance.CheckIfEdge())//如果碰壁就转向
+            {
+                this.transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                direction *= -1;
+                walkDir *= -1;
+            }
+            counter += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+        }
+        
         //Debug.Log("走路结束");
     }
     #endregion

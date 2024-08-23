@@ -42,7 +42,11 @@ public class SpineCharacter : MonoBehaviour
         //return PlayGroupAnim(disappearAnimNames);
         return PlayAnimation(disappearAnimNames[0], false);
     }
-    public float PlayAnimationIdle() { return PlayAnimation("Idle", false); }
+
+    public float PlayAnimationIdle()
+    {
+        return PlayAnimation("Idle", false);
+    }
     
     public virtual float PlayAnimationClick() { return 0; }
     
@@ -59,7 +63,13 @@ public class SpineCharacter : MonoBehaviour
         StartCoroutine(PlayAnimationsInSequence(animationNames));
         return duration;
     }
-    private IEnumerator PlayAnimationsInSequence(List<string> animationNames)//播放动画序列协程
+    
+    /// <summary>
+    /// 播放动画序列协程
+    /// </summary>
+    /// <param name="animationNames"></param>
+    /// <returns></returns>
+    private IEnumerator PlayAnimationsInSequence(List<string> animationNames)
     {
         foreach (var animName in animationNames)
         {
@@ -77,6 +87,11 @@ public class SpineCharacter : MonoBehaviour
             }
         }
     }
+    
+    /// <summary>
+    /// 来回走路的协程
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator MoveAnim()
     {
         float duration = PlayAnimation("Move", false) - moveOffset;
@@ -93,11 +108,14 @@ public class SpineCharacter : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
         }
-        Debug.Log("结束");
+        //Debug.Log("走路结束");
     }
     #endregion
     
-    /*定义动画回调事件函数*/
+    /// <summary>
+    /// 动画回调事件函数
+    /// </summary>
+    /// <param name="trackEntry"></param>
     protected virtual void CompleteEvent(Spine.TrackEntry trackEntry)
     {
         //TODO:需要修改，不是点击动画播放完成后切换回待机动画

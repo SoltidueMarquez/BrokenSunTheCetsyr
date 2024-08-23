@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Runtime.InteropServices; // 为了使用DllImport
 using System;
+using Unity.Mathematics;
 
 
 /// <summary>
@@ -192,5 +193,25 @@ public class BackGroundSet : MonoBehaviour
         SetWindowPos(hwnd, -1, pos.x, pos.y, screenSize.x, screenSize.y, SWP_SHOWWINDOW);
 #endif
         windowPosition = pos;
+    }
+
+    /// <summary>
+    /// 返回窗口位置
+    /// </summary>
+    /// <returns></returns>
+    public Vector2Int CheckPosition()
+    {
+        return windowPosition;
+    }
+
+    /// <summary>
+    /// 检测窗口是否在屏幕边缘
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckIfEdge()
+    {
+        if (Camera.main == null) return false;
+        var screenWidth = Screen.currentResolution.width;
+        return (windowPosition.x < 0 + Mathf.Epsilon) && (windowPosition.x > screenWidth - screenSize.x - Mathf.Epsilon);
     }
 }

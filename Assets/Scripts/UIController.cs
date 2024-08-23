@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     [SerializeField, Tooltip("桌宠")] private GameObject deskPetBody;
     [SerializeField, Tooltip("鼠标光标图片")] private Texture2D cursorTexture;
     [SerializeField, Tooltip("放大滑动条")] private Slider magnifySlider;
-    [SerializeField, Tooltip("动画时长")] private float animTime;
+    [SerializeField, Tooltip("UI动画时长")] private float animTime;
     [SerializeField, Tooltip("UI")] private GameObject UI;
 
     [Header("拖拽设置")]
@@ -24,6 +25,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     [Header("随机动画播放设置")] 
     [SerializeField, Tooltip("随机动画勾选框")] private Toggle randomAnimToggle;
     
+    
     private void Start()
     {
         magnifySlider.onValueChanged.AddListener(delegate {Magnify();});
@@ -34,8 +36,6 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
         {
             AnimationController.Instance.SetIfPlayRandomAnim(isOn);
         });
-
-        //Debug.Log("屏幕大小：" + Screen.currentResolution.width + "," + Screen.currentResolution.height);
     }
 
     private void Awake()

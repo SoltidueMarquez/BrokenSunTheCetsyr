@@ -11,9 +11,6 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
     [SerializeField, Tooltip("UI动画时长")] private float animTime;
     [SerializeField, Tooltip("UI")] private GameObject UI;
 
-    [Header("拖拽设置")]
-    [SerializeField, Tooltip("窗口设置")] private BackGroundSet backgroundSet;
-
     [Header("缩放设置")]
     [SerializeField, Tooltip("缩放极值")] private Vector2 scaleBoundary;
 
@@ -97,12 +94,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
             (int)Normalization(0,Screen.currentResolution.width/10f,tmpPos.x/30),
             -(int)Normalization(0,Screen.currentResolution.height/10f,tmpPos.y/30));
         
-        backgroundSet.ChangeWindowPosition(pos);
-    }
-
-    public void MoveWindow(Vector2Int direction)
-    {
-        backgroundSet.ChangeWindowPosition(direction);
+        BackGroundSet.Instance.ChangeWindowPosition(pos);
     }
     #endregion
 
@@ -148,7 +140,7 @@ public class UIController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDra
 
     private void Test()
     {
-        screenText.text = backgroundSet.CheckPosition().x + backgroundSet.CheckIfEdge().ToString();
+        screenText.text = BackGroundSet.Instance.CheckPosition().x + BackGroundSet.Instance.CheckIfEdge().ToString();
     }
     #endregion
 }

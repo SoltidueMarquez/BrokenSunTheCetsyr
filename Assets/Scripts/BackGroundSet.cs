@@ -8,6 +8,8 @@ using System;
 /// </summary>
 public class BackGroundSet : MonoBehaviour
 {
+    public static BackGroundSet Instance { get; private set; }
+    
     private IntPtr hwnd;
 
     private Vector2Int windowPosition;
@@ -180,6 +182,15 @@ public class BackGroundSet : MonoBehaviour
         SetLayeredWindowAttributes(hwnd, 0, 255, 1);
         //SetLayeredWindowAttributes(hwnd, 0, 255, 2); // 设为2时显示效果变好了，但不能穿透点击
 #endif
+        //单例模式实例化
+        if (Instance == null)
+        {
+            Instance = this as BackGroundSet;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void ChangeWindowPosition(Vector2Int pos)

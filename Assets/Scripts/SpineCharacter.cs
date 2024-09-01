@@ -120,18 +120,27 @@ public class SpineCharacter : MonoBehaviour
         float duration = PlayAnimation("Move", false) - moveOffset;
         Vector2Int direction = walkDir* moveSpeed;
         
+        //取一个随机数，有50%的概率往反方向走
+        if (Random.Range(0.0f, 1.0f) >= 0.5f) { TurnAround(); }
+        
+        //执行走路
         float counter = 0f;
         while (counter < duration)
         {
             BackGroundSet.Instance.ChangeWindowPosition(direction);
             if (BackGroundSet.Instance.CheckIfEdge())//如果碰壁就转向
             {
-                this.transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                direction *= -1;
-                walkDir *= -1;
+                TurnAround();
             }
             counter += 0.01f;
             yield return new WaitForSeconds(0.01f);
+        }
+        //内嵌转向函数
+        void TurnAround()
+        {
+            this.transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            direction *= -1;
+            walkDir *= -1;
         }
     }
     #endregion
